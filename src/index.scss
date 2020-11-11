@@ -1,0 +1,96 @@
+// @import "~bootstrap/scss/bootstrap";
+@import '../node_modules/bootstrap/scss/bootstrap';
+
+.App{
+  background-image: url(https://www.doodleblue.com/_nuxt/img/6ede78e.png);
+}
+
+.loggedUser{
+    text-align: -webkit-right;
+    text-transform: capitalize;
+}
+
+.fa{
+    font-size: 2em;
+    color: cornflowerblue;
+}
+
+.fa-paper-plane{
+    font-size:inherit;
+    color:white;
+}
+
+.messageList,
+.contactList{
+    padding:1em;
+}
+
+.messageList{
+    margin-top:2em;
+    max-height: 12em;
+    overflow-y: auto;
+}
+
+.fa-power-off{
+    margin-right: 1em;
+    cursor: pointer;
+}
+
+.fa-comments{
+    right: 0;
+    position: absolute;
+    margin-right: 1em;
+    cursor: pointer;
+}
+
+.chatsHeading{
+    font-size: 20px;
+    margin-bottom: 1em;
+    font-weight: bold;
+    color: cornflowerblue;
+}
+
+.contactHeading, .userNameHeading, .chatBoxHeader{
+    font-size: 20px;
+    color: cornflowerblue;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.chatBoxHeader{
+    margin-left:0px
+}
+
+.userNameHeading{
+    cursor:pointer;
+}
+
+.popoverList {
+    .contactList{
+        .fa-power-off{
+            font-size: 1em !important;
+        }
+        .card-body{
+            padding:0.5em
+        }
+    padding:0px !important
+    }
+}
+
+.badge{
+    min-width: 6em;
+    text-align: inherit !important;
+    width: auto ;
+}
+
+.chatBox{
+    margin-bottom:2em;
+}
+
+.receiverTextStyle{
+    text-align: end;
+}
+
+.cardContainer{
+    background-image: linear-gradient(#007bff1c, #b3d7ff), url(https://www.doodleblue.com/_nuxt/img/6ede78e.png);
+}
