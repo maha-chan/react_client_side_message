@@ -1,35 +1,25 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, Alert } from "react-bootstrap";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import ContactList from "./ContactList";
 import User from "./User";
 import ChatBox from "./ChatBox";
 
 export const dummy_contact_list = [
-  "Ronnie",
-  "Jennifer",
-  "Joey",
-  "Amanda",
-  "Roy",
-  "Richard",
-  "Stella"
-];
-
-export const dummy_chat_bot = [
   {
-    sender: true,
-    id: "a",
-    text: "Hello"
+    name: "Ronnie ward",
+    companyName: "xxx",
+    email: "ronnieMockEmail@email.com",
   },
   {
-    sender: true,
-    id: "aa",
-    text: "Hello !"
+    name: "Jennifer",
+    companyName: "yyy",
+    email: "jenniferMockEmail@email.com",
   },
-  {
-    sender: false,
-    id: "b",
-    text: "How can i help you ?"
-  }
+  { name: "Joey", companyName: "zzz", email: "joeyMockEmail@email.com" },
+  { name: "Amanda", companyName: "xxx", email: "amandaMockEmail@email.com" },
+  { name: "Roy", companyName: "zzz", email: "royMockEmail@email.com" },
+  { name: "Richard", companyName: "yyy", email: "richardMockEmail@email.com" },
+  { name: "Stella", companyName: "yyy", email: "stellaMockEmail@email.com" },
 ];
 
 class ChatContainer extends Component {
@@ -43,7 +33,7 @@ class ChatContainer extends Component {
       contactList: dummy_contact_list,
       senderChatData: [],
       receiverChatData: [],
-      chats: []
+      chats: [],
     };
     this.handleSelectContact = this.handleSelectContact.bind(this);
     this.handleMessage = this.handleMessage.bind(this);
@@ -51,43 +41,30 @@ class ChatContainer extends Component {
   }
 
   handleSelectContact(sender, list) {
-    this.setState(
-      {
-        sender,
-        loggedIn: true,
-        isOpenChatBox: false,
-        isLoggedInSuccess: true,
-        contactList: list
-      },
-      () => {
-        setTimeout(() => {
-          this.handleDissmissAlert();
-        }, 3000);
-      }
-    );
-  }
-
-  handleMessage(receiver) {
     this.setState({
-      receiver,
-      isOpenChatBox: true,
-      senderChatData: [],
-      receiverChatData: [],
-      chats:[]
+      sender,
+      loggedIn: true,
+      isOpenChatBox: false,
+      isLoggedInSuccess: true,
+      contactList: list,
     });
   }
 
-  handleDissmissAlert() {
-    const { isLoggedInSuccess } = this.state;
-    isLoggedInSuccess &&
-      this.setState({ isLoggedInSuccess: !isLoggedInSuccess });
+  handleMessage(item) {
+    this.setState({
+      receiver: item.name,
+      isOpenChatBox: true,
+      senderChatData: [],
+      receiverChatData: [],
+      chats: [],
+    });
   }
 
   handleChatStore(data) {
     const { chats, sender } = this.state;
     if (data.id !== sender) {
       Object.assign(data, {
-        sender: false
+        sender: false,
       });
     }
     chats.push(data);
@@ -103,31 +80,29 @@ class ChatContainer extends Component {
       senderChatData,
       receiverChatData,
       receiver,
-      isLoggedInSuccess
     } = this.state;
 
     return (
-      <Container>
-        <Alert
-          dismissible={true}
-          onClose={() => this.handleDissmissAlert()}
-          show={isLoggedInSuccess}
-          variant="success"
-        >
-          {`Success, LoggedIn as ${sender}`}
-        </Alert>
-        <Card className='cardContainer'>
-          <Card.Header>
-            <i className="fa fa-address-book" />
-            <span className="contactHeading">Contacts</span>
-            <User
-              currentUser={sender}
-              dummyContentList={contactList}
-              onContactSelect={this.handleSelectContact}
-            />
-          </Card.Header>
+      <Container fluid className="pr-0">
+        <Card>
+          <Row className="userHeader">
+            <Col xs={3} sm={3}>
+              <i
+                id="searchIcon"
+                className="fa fa-search"
+                aria-hidden="true"
+              ></i>
+            </Col>
+            <Col xs={9} sm={9}>
+              <User
+                currentUser={sender}
+                dummyContentList={contactList}
+                onContactSelect={this.handleSelectContact}
+              />
+            </Col>
+          </Row>
           <Row>
-            <Col className='mb-2' xs={12} lg={4}>
+            <Col sm={6} lg={6} md={6}>
               <Card>
                 <ContactList
                   dummyContentList={contactList}
@@ -136,26 +111,40 @@ class ChatContainer extends Component {
                 />
               </Card>
             </Col>
-            {loggedIn && isOpenChatBox && (
-              <Col xs={12} lg={8}>
-                <Card className="chatBox">
-                  <Card.Header className='chatBoxHeader'>{sender}</Card.Header>
-                  <ChatBox
-                    chatStore={this.handleChatStore}
-                    chatData={senderChatData}
-                    currentUserId={sender}
-                  />
-                </Card>
-                <Card className="chatBox">
-                  <Card.Header className='chatBoxHeader'>{receiver}</Card.Header>
-                  <ChatBox
-                    chatStore={this.handleChatStore}
-                    chatData={receiverChatData}
-                    receiverUserId={receiver}
-                  />
-                </Card>
-              </Col>
-            )}
+            <Col xs={12} lg={5}>
+              <Card className="contactDetailsCard">
+                {loggedIn && isOpenChatBox ? (
+                  <Row>
+                    <Col xs={12} lg={6}>
+                      <Card className="chatBox">
+                        <Card.Header className="chatBoxHeader">
+                          {sender}
+                        </Card.Header>
+                        <ChatBox
+                          chatStore={this.handleChatStore}
+                          chatData={senderChatData}
+                          currentUserId={sender}
+                        />
+                      </Card>
+                    </Col>
+                    <Col xs={12} lg={6}>
+                      <Card className="chatBox">
+                        <Card.Header className="chatBoxHeader">
+                          {receiver}
+                        </Card.Header>
+                        <ChatBox
+                          chatStore={this.handleChatStore}
+                          chatData={receiverChatData}
+                          receiverUserId={receiver}
+                        />
+                      </Card>
+                    </Col>
+                  </Row>
+                ) : (
+                  <div className="chatBoxContainer">Chat Box</div>
+                )}
+              </Card>
+            </Col>
           </Row>
         </Card>
       </Container>

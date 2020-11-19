@@ -1,15 +1,17 @@
 import { React, Component } from "react";
 import "./index.scss";
-import {
-  OverlayTrigger,
-  Popover,
-} from "react-bootstrap";
-import ContactList from "./ContactList";
+import { ListGroup, OverlayTrigger, Popover } from "react-bootstrap";
 
 class User extends Component {
-  constructor() {
-    super();
-    this.state = {};
+  constructor(props) {
+    super(props);
+    this.state = { contactList: [] };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.dummyContentList !== this.props.dummyContentList) {
+      this.setState({ contactList: nextProps.dummyContentList });
+    }
   }
 
   handleListUsers() {
@@ -18,22 +20,32 @@ class User extends Component {
 
   render() {
     const { currentUser } = this.props;
-    const { isShowPopover } = this.state;
+    const { isShowPopover, contactList } = this.state;
     const popover = (
       <Popover onClick={() => this.handleListUsers()} id="popover-basic">
-        <Popover.Title as="h3">Contacts</Popover.Title>
+        <Popover.Title className="popoverHeader" as="h3">
+          Contacts
+        </Popover.Title>
         <Popover.Content className="popoverList">
-          <ContactList
-            dummyContentList={this.props.dummyContentList}
-            isDropDownList={true}
-            onContactSelect={this.props.onContactSelect}
-          />
+          <ListGroup>
+            {contactList &&
+              contactList.map((item, key) => {
+                return (
+                  <ListGroup.Item className="listItem" key={key}>
+                    {item.name}
+                  </ListGroup.Item>
+                );
+              })}
+          </ListGroup>
         </Popover.Content>
       </Popover>
     );
     return (
       <div className="loggedUser">
-        <i className="fa fa-user" />
+        <span className="appHeader">+ Add</span>
+        <span className="appHeader">
+          <i className="fa fa-envelope-o" aria-hidden="true"></i>
+        </span>
         {currentUser ? (
           <OverlayTrigger
             show={isShowPopover}
@@ -47,7 +59,8 @@ class User extends Component {
                 this.setState({ isShowPopover: !isShowPopover });
               }}
             >
-              {currentUser}
+              {currentUser} <i className="fa fa-sort-desc" aria-hidden="true" />
+              <i className="ml-3 fa fa-bell-o" aria-hidden="true" />
             </span>
           </OverlayTrigger>
         ) : (

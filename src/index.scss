@@ -1,96 +1,257 @@
-// @import "~bootstrap/scss/bootstrap";
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import "../node_modules/bootstrap/scss/bootstrap";
 
-.App{
+$backgroundColorToTop: linear-gradient(to top, #f857a6, #ff5858);
+$backgroundColorToLeft: linear-gradient(to left, #f857a6, #ff5858);
+$borderColor1: #adb5bd;
+$lightGray: #e8e8e8;
+
+.App {
   background-image: url(https://www.doodleblue.com/_nuxt/img/6ede78e.png);
 }
 
-.loggedUser{
-    text-align: -webkit-right;
-    text-transform: capitalize;
+.loggedUser {
+  text-align: -webkit-right;
+  text-transform: capitalize;
 }
 
-.fa{
-    font-size: 2em;
-    color: cornflowerblue;
+#addressBookFont {
+  color: #dc3545;
+  font-size: 1.5em;
+  transform: scale(-1, 1);
 }
 
-.fa-paper-plane{
-    font-size:inherit;
-    color:white;
+.contactsHeading {
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.fa-paper-plane {
+  color: white;
 }
 
 .messageList,
-.contactList{
-    padding:1em;
+.contactList {
+  padding: 1em;
 }
 
-.messageList{
-    margin-top:2em;
-    max-height: 12em;
-    overflow-y: auto;
+.messageList {
+  margin-top: 2em;
+  max-height: 12em;
+  overflow-y: auto;
 }
 
-.fa-power-off{
-    margin-right: 1em;
-    cursor: pointer;
+.fa-power-off {
+  margin-right: 1em;
+  cursor: pointer;
 }
 
-.fa-comments{
-    right: 0;
-    position: absolute;
-    margin-right: 1em;
-    cursor: pointer;
+.fa-comments {
+  cursor: pointer;
+  font-size: 25px;
+  color: #007bff;
 }
 
-.chatsHeading{
-    font-size: 20px;
-    margin-bottom: 1em;
-    font-weight: bold;
-    color: cornflowerblue;
+.chatsHeading {
+  font-size: 20px;
+  margin-bottom: 1em;
+  font-weight: bold;
+  color: cornflowerblue;
 }
 
-.contactHeading, .userNameHeading, .chatBoxHeader{
-    font-size: 20px;
-    color: cornflowerblue;
-    margin-left: 10px;
-    font-weight: bold;
+.contactHeading,
+.userNameHeading,
+.chatBoxHeader {
+  font-size: 20px;
+  margin-left: 10px;
+  font-weight: bold;
 }
 
-.chatBoxHeader{
-    margin-left:0px
+.chatBoxHeader {
+  margin-left: 0px;
 }
 
-.userNameHeading{
-    cursor:pointer;
+.userNameHeading {
+  cursor: pointer;
+}
+
+.userHeader {
+  background: $backgroundColorToLeft;
+  color: white;
+  font-weight: bolder;
+  .fa-search {
+    color: black;
+  }
+}
+
+.popoverHeader {
+  background: $backgroundColorToLeft;
+  color: white;
+  font-weight: bolder;
 }
 
 .popoverList {
-    .contactList{
-        .fa-power-off{
-            font-size: 1em !important;
-        }
-        .card-body{
-            padding:0.5em
-        }
-    padding:0px !important
+  background: $backgroundColorToTop;
+  .contactList {
+    .card-body {
+      padding: 0.5em;
     }
+    padding: 0px !important;
+  }
 }
 
-.badge{
-    min-width: 6em;
-    text-align: inherit !important;
-    width: auto ;
+.badge {
+  min-width: 6em;
+  text-align: inherit !important;
+  width: auto;
 }
 
-.chatBox{
-    margin-bottom:2em;
+.receiverTextStyle {
+  text-align: end;
 }
 
-.receiverTextStyle{
-    text-align: end;
+#searchIcon {
+  background: #dee2e6;
+  padding: 7px;
+  border-radius: 25px;
+  font-size: 11px;
 }
 
-.cardContainer{
-    background-image: linear-gradient(#007bff1c, #b3d7ff), url(https://www.doodleblue.com/_nuxt/img/6ede78e.png);
+.appHeader {
+  font-weight: bolder;
+  margin-right: 1em;
+}
+
+.sortHeading {
+  text-align: -webkit-right;
+  .sortHeadingName {
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.searchBox {
+  border-radius: 25px !important;
+  border-right: none !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-color: $borderColor1 !important;
+  background-color: $lightGray !important;
+  border: none !important;
+}
+
+.searchBoxBtn {
+  border-left: none !important;
+  border-top-right-radius: 25px !important;
+  border-bottom-right-radius: 25px !important;
+  background-color: $lightGray !important;
+  border-color: $borderColor1 !important;
+  border: none !important;
+  padding: 5px 15px 5px 8px !important;
+
+  .fa-search {
+    font-size: 13px;
+    color: black;
+  }
+}
+
+.searchBoxContainer {
+  align-items: center !important;
+}
+
+.addContactsBtn {
+  .btn {
+    font-weight: bold;
+    background: $backgroundColorToLeft;
+    border: none;
+  }
+}
+
+.tableHeader {
+  background-color: $lightGray;
+  border: none;
+}
+
+.contactListName {
+  display: -webkit-inline-box;
+}
+
+.tableRow {
+  border: none;
+
+  td:nth-child(2) {
+    .emailText {
+      font-size: small;
+      color: darkgray;
+    }
+    .nameText {
+      text-transform: capitalize;
+      font-weight: 500;
+      font-size: larger;
+    }
+    .dot {
+      height: 40px;
+      width: 40px;
+      border-radius: 50%;
+      display: inline-block;
+      vertical-align: sub;
+      margin-right: 1em !important;
+      opacity: 0.7;
+      color: white;
+      font-weight: bolder;
+
+      :first-child {
+        text-align: center;
+        margin-top: 6px;
+      }
+    }
+    display: -webkit-inline-box !important;
+  }
+  td:nth-child(3) {
+    text-transform: capitalize;
+    font-weight: 500;
+  }
+}
+
+.contactDetailsCard {
+  position: absolute !important;
+  bottom: 0;
+  left: 0;
+  height: 80%;
+  width: 100%;
+  justify-content: center;
+  background: $backgroundColorToTop !important;
+  .chatBoxContainer {
+    font-size: -webkit-xxx-large;
+    font-weight: bolder;
+    color: white;
+    text-align: center;
+    font-family: system-ui;
+  }
+}
+
+.table-responsive {
+  overflow-y: auto;
+  height: 30em;
+}
+
+.listItem {
+  margin-bottom: 1em;
+  border-top: 0;
+}
+
+// __________________________________
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border-color: $borderColor1 !important;
+}
+
+.form-control:focus {
+  outline: none !important;
+  border-color: $borderColor1 !important;
+  box-shadow: none !important;
+}
+
+.card {
+  border: none !important;
 }
